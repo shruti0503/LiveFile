@@ -1,4 +1,4 @@
-'use client'
+
 import React from 'react'
 import Header from '@/components/Header'
 import { Editor } from '@/components/editor/Editor'
@@ -9,13 +9,28 @@ import { SignedIn } from '@clerk/nextjs'
 import { UserButton } from '@clerk/nextjs'
 import { SignedOut } from '@clerk/nextjs'
 import { SignInButton } from '@clerk/nextjs'
-const Document = () => {
+import CollaborativeRoom from '@/components/CollaborativeRoom'
+import { getDocument } from '@/lib/actions/room.actions'
+const Document =async ({params:{id}}:SearchParamProps) => {
+  const clerkUser=await currentUser();
+  if(!clerkUser) redirect('/sign-in');
+  const room=await getDocument({
+    roomId:id,
+    userId:clerkUser.emailAddresses[0].emailAddress,
+  })
+
+  if(!room) redirect('/')
+
   return (
-    <div className='new-docpg'>
-       
-      <Editor />
+    <main className='flex w-full flex-col items-center'>
+      {/* @ts-ignore */}
+      <CollaborativeRoom
+       roomId={id}
+       roomMetadata={room.metadata}
+      
+      />
      
-    </div>
+    </main>
   )
 }
 

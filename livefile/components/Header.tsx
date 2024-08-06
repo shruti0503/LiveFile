@@ -1,11 +1,13 @@
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState } from 'react'
 
 const Header = ({ children, className }: HeaderProps) => {
+ 
   return (
-    <div className={cn("header", className)}>
-      <Link href='/' className="md:flex-1">
+    <div className={cn("header items-center justify-center", className)}>
+      <Link href='/' className="">
         <Image 
           src="/assets/icons/logo.svg"
           alt="Logo with name"
