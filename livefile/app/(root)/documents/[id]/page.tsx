@@ -11,7 +11,11 @@ import { SignedOut } from '@clerk/nextjs'
 import { SignInButton } from '@clerk/nextjs'
 import CollaborativeRoom from '@/components/CollaborativeRoom'
 import { getDocument } from '@/lib/actions/room.actions'
+import { getClerkUsers } from '@/lib/actions/user.actions'
+
+
 const Document =async ({params:{id}}:SearchParamProps) => {
+
   const clerkUser=await currentUser();
   if(!clerkUser) redirect('/sign-in');
   const room=await getDocument({
@@ -21,12 +25,26 @@ const Document =async ({params:{id}}:SearchParamProps) => {
 
   if(!room) redirect('/')
 
+  const userIds=Object.keys(room.usersAccesses);
+  const users=await getClerkUsers({userIds});
+  const usersData = users.map((user: User) => ({
+    ...user,
+    userType: room.usersAccesses[user.email]?.includes('room:write')
+      ? 'editor'
+      : 'viewer'
+  }))
+
+
+  const currentUserType = room.usersAccesses[clerkUser.emailAddresses[0].emailAddress]?.includes('room:write') ? 'editor' : 'viewer';
+
   return (
     <main className='flex w-full flex-col items-center'>
       {/* @ts-ignore */}
       <CollaborativeRoom
        roomId={id}
        roomMetadata={room.metadata}
+       users={users}
+       currentUserType={currentUserType}
       
       />
      

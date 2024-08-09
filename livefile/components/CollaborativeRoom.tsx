@@ -15,15 +15,17 @@ import { Input } from './ui/input'
 import { currentUser } from '@clerk/nextjs/server'
 import { updateDocument } from '@/lib/actions/room.actions'
 import Image from 'next/image'
+import Loader from './Loader'
+import GptBox from './GptBox'
 
-const CollaborativeRoom = ({roomId, roomMetadata}:CollaborativeRoomProps) => {
+const CollaborativeRoom = ({roomId, roomMetadata,users, currentUserType}:CollaborativeRoomProps) => {
   //const [documentTitle, setDocumentTitle]=useState(roomMetadata.title);
   const [editing, setediting] = useState(false);
   const [loading, setloading] = useState(false);
   const [DocumentTitle, setDocumentTitle] = useState(roomMetadata.title)
   const conatinerRef=useRef<HTMLDivElement>(null);
   const inputRef=useRef<HTMLInputElement>(null);
-  const currentUserType="editor";
+  //const currentUserType="editor";
 
   const updateTitleHandler=async(e:React.KeyboardEvent<HTMLInputElement>)=>{
 
@@ -43,6 +45,7 @@ const CollaborativeRoom = ({roomId, roomMetadata}:CollaborativeRoomProps) => {
     }
 
   }
+  
 
   useEffect(()=>{
 
@@ -71,7 +74,7 @@ const CollaborativeRoom = ({roomId, roomMetadata}:CollaborativeRoomProps) => {
   },[editing])
   return (
     <RoomProvider id={roomId}>
-        <ClientSideSuspense fallback={<div>Loading…</div>}>
+        <ClientSideSuspense fallback={<Loader />}>
           <div className='collaborative-room'>
                 <Header className="sticky left-0 top-0">
                   <div ref={conatinerRef} className='flex w-fit items-center justify-center gap-2'>
@@ -109,7 +112,7 @@ const CollaborativeRoom = ({roomId, roomMetadata}:CollaborativeRoomProps) => {
                   {loading && <p className='text-sm text-gray-400'>saving...</p>}
 
                   </div>
-                  <ActiveCollaborators />
+                 
                   {/* <ShareModal 
                     roomId={roomId}
                    // collaborators={users}
@@ -117,6 +120,7 @@ const CollaborativeRoom = ({roomId, roomMetadata}:CollaborativeRoomProps) => {
                     currentUserType={currentUserType}
                   /> */}
                 <div className="flex items-center gap-2 lg:gap-4">
+                <ActiveCollaborators />
                 <SignedOut>
                     <SignInButton />
                 </SignedOut>
@@ -126,8 +130,11 @@ const CollaborativeRoom = ({roomId, roomMetadata}:CollaborativeRoomProps) => {
                 </SignedIn>
                 </div>
              </Header>
-
-            <Editor />
+          
+            <Editor 
+               roomId={roomId}
+               currentUserType={currentUserType}
+            />
 
           </div>
         </ClientSideSuspense>

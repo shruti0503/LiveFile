@@ -21,7 +21,7 @@ export const createDocument=async({userId,email}:CreateDocumentParams)=>{
         const room=await liveblocks.createRoom(roomId,{
             metadata,
             usersAccesses,
-            defaultAccesses:["room:write"]
+            defaultAccesses:[]
         })
 
         revalidatePath('/');
@@ -47,6 +47,16 @@ export const getDocument=async({roomId, userId}:{roomId:string, userId:string})=
     }
     catch(err){
         console.log("error", err);
+    }
+}
+export const getDocuments=async(email:string)=>{
+    try{
+        const rooms=await liveblocks.getRooms({userId:email});
+        return parseStringify(rooms);
+
+    }
+    catch(error){
+        console.log("error while getting rooms", error);
     }
 }
 

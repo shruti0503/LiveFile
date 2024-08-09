@@ -1,31 +1,36 @@
-'use client'
+'use client';
 
-import {
-    LiveblocksProvider,
-    RoomProvider,
-    ClientSideSuspense,
-  } from "@liveblocks/react/suspense";
+import Loader from '@/components/Loader';
+import { getClerkUsers, getDocumentUsers } from '@/lib/actions/user.actions';
+import { useUser } from '@clerk/nextjs';
+import { ClientSideSuspense, LiveblocksProvider } from '@liveblocks/react/suspense';
+import { ReactNode } from 'react';
 
-import React from 'react'
-import Loader from "@/components/Loader";
-import { ReactNode } from "react";
-import { getClerkUsers } from "@/lib/actions/user.actions";
+const Provider = ({ children }: { children: ReactNode}) => {
+  const { user: clerkUser } = useUser();
 
-const Provider = ({children}:{children:ReactNode}) => {
   return (
-    <LiveblocksProvider  authEndpoint="/api/liveblocks-auth"
+    <LiveblocksProvider 
+      authEndpoint="/api/liveblocks-auth"
       resolveUsers={async ({ userIds }) => {
         const users = await getClerkUsers({ userIds});
 
         return users;
       }}
+      resolveMentionSuggestions={async ({ text, roomId }) => {
+        const roomUsers = await getDocumentUsers({
+          roomId,
+          currentUser: clerkUser?.emailAddresses[0].emailAddress!,
+          text,
+        })
+
+        return roomUsers;
+      }}
     >
-    {/* <RoomProvider id="my-room"> */}
       <ClientSideSuspense fallback={<Loader />}>
         {children}
       </ClientSideSuspense>
-    {/* </RoomProvider> */}
-  </LiveblocksProvider>
+    </LiveblocksProvider>
   )
 }
 
