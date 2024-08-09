@@ -1,6 +1,7 @@
 'use server'
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { parseStringify } from "../utils";
 
 // Access your API key as an environment variable (see "Set up your API key" above)
 const genAI = new GoogleGenerativeAI(process.env.AI_KEY as string);
@@ -12,6 +13,8 @@ export const  GenerateAIText =async(prompt:string)=> {
         const response = result.response;
         const text = response.text();
         console.log("ai text is",text);
+        return parseStringify(text);
+
 
     }
     catch(err){

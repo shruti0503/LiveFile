@@ -33,7 +33,7 @@ export default async function Home() {
             <Link href={`/documents/${id}`} className="flex flex-1 items-center gap-4">
               <div className="hidden rounded-md bg-dark-500 p-2 sm:block">
                 <Image
-                  src="/assets/icons/doc.svg"
+                  src="/assets/icons/file.png"
                   alt="file"
                   width={40}
                   height={40}
@@ -54,7 +54,7 @@ export default async function Home() {
       ) : (
         <div className="document-list-empty">
           <Image
-            src="/assets/icons/doc.svg"
+            src="/assets/icons/file.png"
             alt="Document"
             width={40}
             height={40}

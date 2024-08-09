@@ -17,10 +17,10 @@ const Chat = ({text, sentBy}:ChatProps) => {
        "rounded-bl-xl rounded-br-none rounded-t-xl": sentBy === "user", // Right-bottom corner 0, left-bottom corner rounded
 
     })}>
-        <p className='w-full'>{text}</p>
+        <p className='w-full text-xs'>{text}</p>
       {
-        sentBy==="ai" &&
-        <ClipboardCopy />
+        sentBy=="ai" &&
+        <ClipboardCopy  className='w-[8%] cursor-pointer'/>
       }
     </div>
   )

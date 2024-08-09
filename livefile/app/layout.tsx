@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   description:
     "Go-to Doc edior",
   icons: {
-    icon: "/assets/icons/logoFull.png",
+    icon: "/assets/icons/file.png",
   },
 };
 

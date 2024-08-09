@@ -24,7 +24,7 @@
   .GPT_box{
     height: 80vh;
     background-color: #0f1c34;
-    width: 20%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
