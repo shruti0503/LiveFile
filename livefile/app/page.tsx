@@ -27,6 +27,17 @@ export default async function Home() {
           </SignedIn>
         </div>
       </Header>
+      <Image
+            src="/assets/icons/file.png"
+            alt="Document"
+            width={40}
+            height={40}
+            className="mx-auto"
+          />
+          <AddDocumenBtn
+            userId={clerkUser.id}
+            email={clerkUser.emailAddresses[0].emailAddress}
+          />
       <ul className="document-ul">
         {roomDocuments && roomDocuments.data.map(({ id, metadata, createdAt }: any) => (
           <li key={id} className="document-list-item">
@@ -47,25 +58,7 @@ export default async function Home() {
           </li>
         ))}
       </ul>
-      {roomDocuments.data.length > 0 ? (
-        <div>
-          {/* Add any content you want to display when documents are present */}
-        </div>
-      ) : (
-        <div className="document-list-empty">
-          <Image
-            src="/assets/icons/file.png"
-            alt="Document"
-            width={40}
-            height={40}
-            className="mx-auto"
-          />
-          <AddDocumenBtn
-            userId={clerkUser.id}
-            email={clerkUser.emailAddresses[0].emailAddress}
-          />
-        </div>
-      )}
+     
     </main>
   );
 }
