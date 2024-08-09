@@ -1,6 +1,5 @@
 import { SignUp } from '@clerk/nextjs'
 import Image from 'next/image'
-import { motion } from "framer-motion";
 
 const SignUpPage = () => {
   return (
@@ -10,6 +9,7 @@ const SignUpPage = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
           > */}
+
             <div className='flex items-center justify-center'>
               <Image 
                 src="/assets/icons/file.png"
