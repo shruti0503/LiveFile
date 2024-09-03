@@ -43,7 +43,3 @@ Welcome to **LiveFile**! 🚀 The ultimate document collaboration platform that 
 - **Chat and collaborate**: Use the built-in chat to communicate and collaborate in real-time.
 - **Leverage AI**: Use the AI assistant to improve your writing, suggest changes, or generate new content.
 
----
-
-🎉 Thank you for checking out LiveFile! We hope it makes your collaborative writing experience more enjoyable and productive.
-
