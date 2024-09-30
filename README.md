@@ -31,9 +31,8 @@ Welcome to **LiveFile**! 🚀 The ultimate document collaboration platform that 
 - **Frontend**: Next.js, Tailwind CSS, ShadCN
 - **Real-Time Collaboration**: Liveblocks
 - **AI Chat**: [Your AI tool/library]
-- **Backend**: [Your backend stack, e.g., Node.js, Express]
-- **Authentication**: [Your auth solution, e.g., Firebase, Auth0]
-- **Database**: [Your database, e.g., MongoDB, PostgreSQL]
+- **Authentication**: Clerk
+
 
 
 ## 💡 Usage
