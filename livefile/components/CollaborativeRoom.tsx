@@ -12,6 +12,7 @@ import { Editor } from './editor/Editor'
 import ActiveCollaborators from './activeCollaboratorsList'
 import { useState } from 'react'
 import { Input } from './ui/input'
+import ShareModal from './ShareModel'
 import { currentUser } from '@clerk/nextjs/server'
 import { updateDocument } from '@/lib/actions/room.actions'
 import Image from 'next/image'
@@ -26,6 +27,8 @@ const CollaborativeRoom = ({roomId, roomMetadata,users, currentUserType}:Collabo
   const conatinerRef=useRef<HTMLDivElement>(null);
   const inputRef=useRef<HTMLInputElement>(null);
   //const currentUserType="editor";
+
+  console.log("currentUserType",currentUserType)
 
   const updateTitleHandler=async(e:React.KeyboardEvent<HTMLInputElement>)=>{
 
@@ -113,14 +116,15 @@ const CollaborativeRoom = ({roomId, roomMetadata,users, currentUserType}:Collabo
 
                   </div>
                  
-                  {/* <ShareModal 
-                    roomId={roomId}
-                   // collaborators={users}
-                    creatorId={roomMetadata.creatorId}
-                    currentUserType={currentUserType}
-                  /> */}
+               
                 <div className="flex items-center gap-2 lg:gap-4">
                 <ActiveCollaborators />
+                   <ShareModal 
+                    roomId={roomId}
+                    collaborators={users}
+                    creatorId={roomMetadata.creatorId}
+                    currentUserType={currentUserType}
+                  />
                 <SignedOut>
                     <SignInButton />
                 </SignedOut>

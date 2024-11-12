@@ -8,15 +8,16 @@ export function cn(...inputs: ClassValue[]) {
 export const parseStringify = (value: any) => JSON.parse(JSON.stringify(value));
 
 export const getAccessType = (userType: UserType) => {
+  console.log("getAccessType",userType)
   switch (userType) {
     case 'creator':
       return ['room:write'];
     case 'editor':
       return ['room:write'];
     case 'viewer':
-      return ['room:read', 'room:presence:write'];
+      return ['room:write', 'room:presence:write'];
     default:
-      return ['room:read', 'room:presence:write'];
+      return ['room:write', 'room:presence:write'];
   }
 };
 
