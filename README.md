@@ -1,6 +1,7 @@
 # 📝 LiveFile
 
 Welcome to **LiveFile**! 🚀 The ultimate document collaboration platform that brings your team together with real-time sharing, collaborative editing, and AI-powered assistance. Whether you're drafting a simple note or creating a complex document, LiveFile makes it easy, efficient, and fun!
+Deployed Link: https://live-file.vercel.app/
 
 <img width="1440" alt="Screenshot 2024-08-13 at 10 11 43 PM" src="https://github.com/user-attachments/assets/6d49e01c-2375-4cad-ba1c-55ddb36d5584">
 
